@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Project database & viewer – SciLifeLab IDS</title>
+  <title>Project database &amp; viewer – SciLifeLab IDS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -15,9 +15,9 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text-main);
       background: var(--bg);
       line-height: 1.5;
@@ -27,32 +27,38 @@
       max-width: 1000px;
       margin: 0 auto;
       padding: 1.5rem 1.5rem 3rem;
+      box-sizing: border-box;
     }
 
-    header {
+    header.project-header {
       border-bottom: 2px solid var(--accent-soft);
       margin-bottom: 1.5rem;
       padding-bottom: 0.75rem;
     }
 
-    h1 {
+    .project-header h1 {
       font-size: 1.9rem;
       margin: 0 0 0.25rem;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-      margin-top: 1.5rem;
-    }
-
-    h3 {
-      font-size: 1.15rem;
-      margin-top: 1rem;
     }
 
     .subtitle {
       color: var(--text-muted);
       font-size: 0.95rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 0.15rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.5rem;
     }
 
     .layout {
@@ -72,32 +78,19 @@
       border-radius: 10px;
       border: 1px solid var(--border);
       padding: 1rem 1.25rem;
+      box-sizing: border-box;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: var(--accent-soft);
-      color: var(--accent);
-      border-radius: 999px;
-      padding: 0.15rem 0.75rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
+    .card h2 {
+      margin-top: 0.2rem;
+      font-size: 1.4rem;
     }
 
     .grid-two {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 0.75rem 1.5rem;
-    }
-
-    ul {
-      margin: 0.2rem 0 0.4rem 1.1rem;
-      padding: 0;
     }
 
     .meta-row {
@@ -112,6 +105,34 @@
     .meta-label {
       font-weight: 600;
       color: var(--text-main);
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .diagram {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 0.5rem;
+      box-sizing: border-box;
+    }
+
+    /* Milestones */
+
+    .milestone-card {
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .milestone-card:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
     }
 
     .milestone-header {
@@ -136,7 +157,7 @@
     }
 
     .progress-bar-wrapper {
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
       background: var(--accent-soft);
       border-radius: 999px;
       overflow: hidden;
@@ -155,25 +176,11 @@
       flex-wrap: wrap;
       gap: 0.5rem 1rem;
       font-size: 0.85rem;
-      margin-top: 0.5rem;
+      margin-top: 0.4rem;
       color: var(--text-muted);
     }
 
-    .muted {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .diagram {
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: #fff;
-      padding: 0.5rem;
-      box-sizing: border-box;
-    }
-
-    footer {
+    footer.project-footer {
       margin-top: 2rem;
       border-top: 1px solid var(--border);
       padding-top: 0.75rem;
@@ -184,7 +191,7 @@
 </head>
 <body>
   <div class="page">
-    <header>
+    <header class="project-header">
       <div class="badge">Project tracking</div>
       <h1>Project database &amp; viewer</h1>
       <div class="subtitle">
@@ -193,68 +200,58 @@
     </header>
 
     <div class="layout">
-      <!-- LEFT: narrative one-pager -->
       <main class="card">
-        <section>
-          <h2>Scope</h2>
-          <p>
-            Centrally store and view project information from all SciLifeLab units in a
-            consistent, searchable way, with clear interfaces for users and staff.
-          </p>
-        </section>
+        <h2>Scope</h2>
+        <p>
+          Centrally store and view project information from all SciLifeLab units in a
+          consistent, searchable way, with clear interfaces for users and staff.
+        </p>
 
-        <section>
-          <h2>Main deliverables</h2>
-          <ul>
-            <li>Pan-SciLifeLab project database</li>
-            <li>Web interface for users</li>
-            <li>Web interface for staff</li>
-          </ul>
-        </section>
+        <h2>Main deliverables</h2>
+        <ul>
+          <li>Pan-SciLifeLab project database</li>
+          <li>Web interface for users</li>
+          <li>Web interface for staff</li>
+        </ul>
 
-        <section>
-          <h2>Timelines</h2>
-          <div class="grid-two">
-            <div>
-              <ul>
-                <li><strong>April 2026</strong> – Database implemented</li>
-                <li><strong>May 2026</strong> – Two units with data in the database</li>
-              </ul>
-            </div>
-            <div>
-              <ul>
-                <li><strong>October 2026</strong> – Web interface 1.0, pilot users</li>
-                <li><strong>December 2026</strong> – Launch, all units included</li>
-              </ul>
-            </div>
+        <h2>Timelines</h2>
+        <div class="grid-two">
+          <div>
+            <ul>
+              <li><strong>April 2026</strong> – Database implemented</li>
+              <li><strong>May 2026</strong> – Two units with data in the database</li>
+            </ul>
           </div>
-
-          <div class="meta-row">
-            <div><span class="meta-label">Ready:</span> 261231</div>
-            <div>
-              <span class="meta-label">Resources:</span>
-              XX DC staff + 0.1 FTE per unit (NBIS DM?)
-            </div>
+          <div>
+            <ul>
+              <li><strong>October 2026</strong> – Web interface 1.0, pilot users</li>
+              <li><strong>December 2026</strong> – Launch, all units included</li>
+            </ul>
           </div>
-        </section>
+        </div>
 
-        <section>
-          <h2>Dependencies</h2>
-          <ul>
-            <li>
-              Identity/Access (IAA) — Leads: Betül, Las-Ove
-              <br /><span class="muted">Includes replacing current staff database</span>
-            </li>
-            <li>Minor storage — already exists</li>
-          </ul>
-        </section>
+        <div class="meta-row">
+          <div><span class="meta-label">Ready:</span> 261231</div>
+          <div>
+            <span class="meta-label">Resources:</span>
+            XX DC staff + 0.1 FTE per unit (NBIS DM?)
+          </div>
+        </div>
+
+        <h2>Dependencies</h2>
+        <ul>
+          <li>
+            Identity/Access (IAA) — Leads: Betül, Las-Ove<br />
+            <span class="muted">Includes replacing current staff database</span>
+          </li>
+          <li>Minor storage — already exists</li>
+        </ul>
       </main>
 
-      <!-- RIGHT: architecture + live milestone status -->
       <aside>
         <section class="card">
           <h2>High-level architecture</h2>
-          <!-- TODO: replace src with the actual path in your repo -->
+          <!-- Replace src with the actual path in your repo, e.g. assets/img/... -->
           <img
             class="diagram"
             src="img/project-tracking-architecture.png"
@@ -268,41 +265,19 @@
 
         <section class="card">
           <h2>Milestone status</h2>
-
-          <div class="milestone-header">
-            <div class="milestone-title" id="milestone-title">
-              Loading milestone…
-            </div>
-            <a
-              id="milestone-link"
-              class="milestone-link"
-              href="https://github.com/wpotrzebowski/ids-project-tracking/milestone/1"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View on GitHub
-            </a>
-          </div>
-
-          <p class="muted" id="milestone-description"></p>
-
-          <div class="progress-bar-wrapper" aria-hidden="true">
-            <div class="progress-bar" id="milestone-progress-bar"></div>
-          </div>
-
-          <div class="milestone-meta" id="milestone-meta">
-            <!-- Populated by JS -->
+          <div id="milestones-container">
+            <p class="muted">Loading milestones from GitHub…</p>
           </div>
 
           <p class="muted" id="milestone-error" style="display:none; margin-top:0.75rem;">
-            Couldn’t load live milestone data from GitHub. You can still open the milestone via
-            the link above.
+            Couldn’t load live milestone data from GitHub. You can still open the repository and
+            milestones directly on GitHub.
           </p>
         </section>
       </aside>
     </div>
 
-    <footer>
+    <footer class="project-footer">
       Last updated:
       <span id="last-updated"></span>
       · Repository:
@@ -318,18 +293,16 @@
 
   <script>
     // Basic milestone monitoring using the public GitHub API.
-    // Adjust these values if you change repo or milestone.
+    // Adjust these values if you change repo.
     const repoOwner = "wpotrzebowski";
     const repoName = "ids-project-tracking";
-    const milestoneNumber = 1;
 
-    const milestoneApiUrl =
+    const milestonesApiUrl =
       "https://api.github.com/repos/" +
       repoOwner +
       "/" +
       repoName +
-      "/milestones/" +
-      milestoneNumber;
+      "/milestones?state=all&per_page=100";
 
     function updateLastUpdated() {
       const el = document.getElementById("last-updated");
@@ -339,8 +312,72 @@
       }
     }
 
-    function loadMilestone() {
-      fetch(milestoneApiUrl)
+    function renderMilestone(milestone) {
+      const openIssues = milestone.open_issues || 0;
+      const closedIssues = milestone.closed_issues || 0;
+      const total = openIssues + closedIssues;
+      const completion =
+        total > 0 ? Math.round((closedIssues / total) * 100) : 0;
+
+      const dueOn = milestone.due_on
+        ? new Date(milestone.due_on).toLocaleDateString()
+        : "No due date";
+
+      const description =
+        milestone.description ||
+        "Milestone progress for the project tracking implementation.";
+
+      const url =
+        milestone.html_url ||
+        ("https://github.com/" +
+          repoOwner +
+          "/" +
+          repoName +
+          "/milestone/" +
+          milestone.number);
+
+      const div = document.createElement("div");
+      div.className = "milestone-card";
+
+      div.innerHTML = `
+        <div class="milestone-header">
+          <div class="milestone-title">
+            ${milestone.title}
+          </div>
+          <a
+            class="milestone-link"
+            href="${url}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub
+          </a>
+        </div>
+
+        <p class="muted">
+          ${description}
+        </p>
+
+        <div class="progress-bar-wrapper" aria-hidden="true">
+          <div class="progress-bar" style="width: ${completion}%;"></div>
+        </div>
+
+        <div class="milestone-meta">
+          <span><strong>${completion}%</strong> complete</span>
+          <span><strong>${closedIssues}</strong> closed / <strong>${openIssues}</strong> open issues</span>
+          <span><strong>State:</strong> ${milestone.state}</span>
+          <span><strong>Due:</strong> ${dueOn}</span>
+        </div>
+      `;
+
+      return div;
+    }
+
+    function loadMilestones() {
+      const container = document.getElementById("milestones-container");
+      if (!container) return;
+
+      fetch(milestonesApiUrl)
         .then(function (response) {
           if (!response.ok) {
             throw new Error("GitHub API error: " + response.status);
@@ -348,34 +385,25 @@
           return response.json();
         })
         .then(function (data) {
-          document.getElementById("milestone-title").textContent = data.title || "Milestone";
+          container.innerHTML = "";
 
-          if (data.description) {
-            document.getElementById("milestone-description").textContent = data.description;
-          } else {
-            document.getElementById("milestone-description").textContent =
-              "Milestone progress for the project tracking implementation.";
+          if (!Array.isArray(data) || data.length === 0) {
+            container.innerHTML =
+              '<p class="muted">No milestones found for this repository.</p>';
+            return;
           }
 
-          const openIssues = data.open_issues || 0;
-          const closedIssues = data.closed_issues || 0;
-          const total = openIssues + closedIssues;
-          const completion = total > 0 ? Math.round((closedIssues / total) * 100) : 0;
+          // Optional: sort by due date (earliest first)
+          data.sort(function (a, b) {
+            const da = a.due_on ? new Date(a.due_on).getTime() : Infinity;
+            const db = b.due_on ? new Date(b.due_on).getTime() : Infinity;
+            return da - db;
+          });
 
-          document.getElementById("milestone-progress-bar").style.width =
-            completion + "%";
-
-          const dueOn = data.due_on
-            ? new Date(data.due_on).toLocaleDateString()
-            : "No due date";
-
-          const metaEl = document.getElementById("milestone-meta");
-          metaEl.innerHTML = `
-            <span><strong>${completion}%</strong> complete</span>
-            <span><strong>${closedIssues}</strong> closed / <strong>${openIssues}</strong> open issues</span>
-            <span><strong>State:</strong> ${data.state}</span>
-            <span><strong>Due:</strong> ${dueOn}</span>
-          `;
+          data.forEach(function (m) {
+            const card = renderMilestone(m);
+            container.appendChild(card);
+          });
         })
         .catch(function () {
           document.getElementById("milestone-error").style.display = "block";
@@ -383,7 +411,7 @@
     }
 
     updateLastUpdated();
-    loadMilestone();
+    loadMilestones();
   </script>
 </body>
 </html>
