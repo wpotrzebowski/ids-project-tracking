@@ -6,12 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --accent: #5bb96a;
-      --accent-soft: #e6f5ea;
-      --text-main: #222;
-      --text-muted: #666;
-      --border: #ddd;
-      --bg: #fafafa;
+      --accent: #4C979F;
+      --accent-dark: #3A7A82;
+      --accent-soft: #E6F2F4;
+      --accent-lighter: #F0F7F8;
+      --text-main: #1a1a1a;
+      --text-muted: #5a5a5a;
+      --border: #d0d8da;
+      --bg: #f8fafa;
     }
 
     body {
@@ -31,9 +33,28 @@
     }
 
     header.project-header {
-      border-bottom: 2px solid var(--accent-soft);
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
+      border-bottom: 3px solid var(--accent);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      background: linear-gradient(to bottom, var(--accent-lighter), transparent);
+      padding: 1.5rem 1rem;
+      margin: -1.5rem -1.5rem 2rem;
+      border-radius: 0 0 12px 12px;
+      position: relative;
+    }
+
+    .header-logo {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      height: 40px;
+      width: auto;
+      opacity: 0.9;
+      transition: opacity 0.2s ease;
+    }
+
+    .header-logo:hover {
+      opacity: 1;
     }
 
     .project-header h1 {
@@ -71,20 +92,34 @@
       .layout {
         grid-template-columns: 1fr;
       }
+
+      .header-logo {
+        height: 30px;
+        top: 1rem;
+        right: 1rem;
+      }
     }
 
     .card {
       background: #fff;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid var(--border);
-      padding: 1rem 1.25rem;
+      padding: 1.5rem 1.5rem;
       box-sizing: border-box;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 2px 8px rgba(76, 151, 159, 0.08);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(76, 151, 159, 0.12);
     }
 
     .card h2 {
       margin-top: 0.2rem;
+      margin-bottom: 1rem;
       font-size: 1.4rem;
+      color: var(--accent-dark);
+      font-weight: 700;
     }
 
     .grid-two {
@@ -122,6 +157,90 @@
     }
 
     /* Milestones */
+
+    .milestone-section-header {
+      padding: 0.5rem 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .milestone-toggle-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      border-radius: 6px;
+    }
+
+    .milestone-toggle-button:hover {
+      background-color: var(--accent-lighter);
+    }
+
+    .milestone-toggle-icon {
+      font-size: 0.9rem;
+      transition: transform 0.2s ease;
+    }
+
+    .milestone-toggle-button.collapsed .milestone-toggle-icon {
+      transform: rotate(-90deg);
+    }
+
+    .milestone-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+
+    .milestone-overview-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .milestone-overview-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .milestone-overview-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+    }
+
+    .milestone-overview-progress {
+      margin-top: 0.5rem;
+      grid-column: 1 / -1;
+    }
+
+    .milestone-content {
+      max-height: 1000px;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+
+    .milestone-content.collapsed {
+      max-height: 0;
+      opacity: 0;
+      margin: 0;
+    }
 
     .milestone-card {
       border-top: 1px solid var(--border);
@@ -161,13 +280,13 @@
       background: var(--accent-soft);
       border-radius: 999px;
       overflow: hidden;
-      height: 10px;
+      height: 8px;
     }
 
     .progress-bar {
       height: 100%;
       width: 0%;
-      background: var(--accent);
+      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
       transition: width 0.3s ease;
     }
 
@@ -181,21 +300,45 @@
     }
 
     footer.project-footer {
-      margin-top: 2rem;
-      border-top: 1px solid var(--border);
-      padding-top: 0.75rem;
-      font-size: 0.8rem;
+      margin-top: 3rem;
+      border-top: 2px solid var(--accent-soft);
+      padding-top: 1rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
+    }
+
+    footer.project-footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer.project-footer a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    ul li {
+      margin-bottom: 0.3rem;
     }
   </style>
 </head>
 <body>
   <div class="page">
     <header class="project-header">
-      <div class="badge">Project tracking</div>
-      <h1>Project database &amp; viewer</h1>
+      <a href="SciLifeLab_Logotype_Green_POS.png" target="_blank" rel="noopener noreferrer">
+        <img 
+          src="SciLifeLab_Logotype_Green_POS.png" 
+          alt="SciLifeLab Logo" 
+          class="header-logo"
+        />
+      </a>
+      <h1>Project tracking</h1>
       <div class="subtitle">
-        Project owner/leader: Wojtek / Moa · Pan-SciLifeLab project tracking initiative
+        Project owner/leader: xxxxxxxx · IDS Area owner: xxxxxxxx
       </div>
     </header>
 
@@ -206,6 +349,12 @@
           Centrally store and view project information from all SciLifeLab units in a
           consistent, searchable way, with clear interfaces for users and staff.
         </p>
+
+        <h2>Out of scope</h2>
+        <p class="muted">To be defined.</p>
+
+        <h2>Value</h2>
+        <p class="muted">To be defined.</p>
 
         <h2>Main deliverables</h2>
         <ul>
@@ -241,7 +390,7 @@
         <h2>Dependencies</h2>
         <ul>
           <li>
-            Identity/Access (IAA) — Leads: Betül, Las-Ove<br />
+            Identity/Access (IAA) — Leads: xxxxxxxx <br />
             <span class="muted">Includes replacing current staff database</span>
           </li>
           <li>Minor storage — already exists</li>
@@ -254,7 +403,7 @@
           <!-- Replace src with the actual path in your repo, e.g. assets/img/... -->
           <img
             class="diagram"
-            src="img/project-tracking-architecture.png"
+            src="img/FollowUp_projects_outlook.png"
             alt="Diagram of project tracking: login, web interface, notification system, and data flows from Order Portal, iLAB, FMS and other unit systems."
           />
           <p class="muted" style="margin-top:0.5rem;">
@@ -264,15 +413,26 @@
         </section>
 
         <section class="card">
-          <h2>Milestone status</h2>
-          <div id="milestones-container">
-            <p class="muted">Loading milestones from GitHub…</p>
+          <div class="milestone-section-header">
+            <h2 style="margin: 0;">Milestone status</h2>
           </div>
+          <div id="milestone-overview" class="milestone-overview" style="display: none;">
+            <!-- Overview stats will be populated by JavaScript -->
+          </div>
+          <div class="milestone-content collapsed" id="milestone-content">
+            <div id="milestones-container">
+              <p class="muted">Loading milestones from GitHub…</p>
+            </div>
 
-          <p class="muted" id="milestone-error" style="display:none; margin-top:0.75rem;">
-            Couldn’t load live milestone data from GitHub. You can still open the repository and
-            milestones directly on GitHub.
-          </p>
+            <p class="muted" id="milestone-error" style="display:none; margin-top:0.75rem;">
+              Couldn't load live milestone data from GitHub. You can still open the repository and
+              milestones directly on GitHub.
+            </p>
+          </div>
+          <div class="milestone-toggle-button collapsed" id="milestone-toggle">
+            <span class="milestone-toggle-icon">▼</span>
+            <span>Show details</span>
+          </div>
         </section>
       </aside>
     </div>
@@ -373,6 +533,76 @@
       return div;
     }
 
+    function updateMilestoneOverview(milestones) {
+      const overview = document.getElementById("milestone-overview");
+      if (!overview || !milestones || milestones.length === 0) {
+        if (overview) overview.style.display = "none";
+        return;
+      }
+
+      let totalOpen = 0;
+      let totalClosed = 0;
+      let openMilestones = 0;
+      let closedMilestones = 0;
+      let totalCompletion = 0;
+      let milestonesWithIssues = 0;
+
+      milestones.forEach(function(m) {
+        const openIssues = m.open_issues || 0;
+        const closedIssues = m.closed_issues || 0;
+        const total = openIssues + closedIssues;
+        
+        totalOpen += openIssues;
+        totalClosed += closedIssues;
+        
+        if (m.state === "open") {
+          openMilestones++;
+        } else {
+          closedMilestones++;
+        }
+
+        if (total > 0) {
+          totalCompletion += Math.round((closedIssues / total) * 100);
+          milestonesWithIssues++;
+        }
+      });
+
+      const avgCompletion = milestonesWithIssues > 0 
+        ? Math.round(totalCompletion / milestonesWithIssues) 
+        : 0;
+      const totalIssues = totalOpen + totalClosed;
+
+      overview.innerHTML = `
+        <div class="milestone-overview-item">
+          <div class="milestone-overview-label">Total</div>
+          <div class="milestone-overview-value">${milestones.length}</div>
+        </div>
+        <div class="milestone-overview-item">
+          <div class="milestone-overview-label">Open</div>
+          <div class="milestone-overview-value">${openMilestones}</div>
+        </div>
+        <div class="milestone-overview-item">
+          <div class="milestone-overview-label">Closed</div>
+          <div class="milestone-overview-value">${closedMilestones}</div>
+        </div>
+        <div class="milestone-overview-item">
+          <div class="milestone-overview-label">Issues</div>
+          <div class="milestone-overview-value">${totalIssues}</div>
+        </div>
+        <div class="milestone-overview-progress">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+            <span class="milestone-overview-label">Overall Progress</span>
+            <span style="font-weight: 700; color: var(--accent-dark);">${avgCompletion}%</span>
+          </div>
+          <div class="progress-bar-wrapper">
+            <div class="progress-bar" style="width: ${avgCompletion}%;"></div>
+          </div>
+        </div>
+      `;
+
+      overview.style.display = "grid";
+    }
+
     function loadMilestones() {
       const container = document.getElementById("milestones-container");
       if (!container) return;
@@ -390,6 +620,7 @@
           if (!Array.isArray(data) || data.length === 0) {
             container.innerHTML =
               '<p class="muted">No milestones found for this repository.</p>';
+            updateMilestoneOverview([]);
             return;
           }
 
@@ -400,6 +631,9 @@
             return da - db;
           });
 
+          // Update overview with summary stats
+          updateMilestoneOverview(data);
+
           data.forEach(function (m) {
             const card = renderMilestone(m);
             container.appendChild(card);
@@ -407,7 +641,26 @@
         })
         .catch(function () {
           document.getElementById("milestone-error").style.display = "block";
+          updateMilestoneOverview([]);
         });
+    }
+
+    // Milestone section toggle
+    const milestoneToggle = document.getElementById("milestone-toggle");
+    const milestoneContent = document.getElementById("milestone-content");
+    
+    if (milestoneToggle && milestoneContent) {
+      milestoneToggle.addEventListener("click", function() {
+        const isCollapsed = milestoneToggle.classList.contains("collapsed");
+        milestoneToggle.classList.toggle("collapsed");
+        milestoneContent.classList.toggle("collapsed");
+        
+        // Update button text
+        const buttonText = milestoneToggle.querySelector("span:last-child");
+        if (buttonText) {
+          buttonText.textContent = isCollapsed ? "Hide details" : "Show details";
+        }
+      });
     }
 
     updateLastUpdated();
