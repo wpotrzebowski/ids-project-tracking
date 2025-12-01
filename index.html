@@ -23,22 +23,23 @@
       color: var(--text-main);
       background: var(--bg);
       line-height: 1.5;
+      font-size: 0.9rem;
     }
 
     .page {
       max-width: 1000px;
       margin: 0 auto;
-      padding: 1.5rem 1.5rem 3rem;
+      padding: 1rem 1.5rem 2rem;
       box-sizing: border-box;
     }
 
     header.project-header {
       border-bottom: 3px solid var(--accent);
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
       background: linear-gradient(to bottom, var(--accent-lighter), transparent);
-      padding: 1.5rem 1rem;
-      margin: -1.5rem -1.5rem 2rem;
+      padding: 1rem 1rem;
+      margin: -1rem -1.5rem 1.5rem;
       border-radius: 0 0 12px 12px;
       position: relative;
     }
@@ -58,13 +59,13 @@
     }
 
     .project-header h1 {
-      font-size: 1.9rem;
+      font-size: 1.7rem;
       margin: 0 0 0.25rem;
     }
 
     .subtitle {
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.85rem;
     }
 
     .badge {
@@ -85,7 +86,7 @@
     .layout {
       display: grid;
       grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
-      gap: 1.5rem;
+      gap: 1rem;
     }
 
     @media (max-width: 800px) {
@@ -104,7 +105,7 @@
       background: #fff;
       border-radius: 12px;
       border: 1px solid var(--border);
-      padding: 1.5rem 1.5rem;
+      padding: 1rem 1.25rem;
       box-sizing: border-box;
       box-shadow: 0 2px 8px rgba(76, 151, 159, 0.08);
       transition: box-shadow 0.2s ease;
@@ -115,9 +116,9 @@
     }
 
     .card h2 {
-      margin-top: 0.2rem;
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
       color: var(--accent-dark);
       font-weight: 700;
     }
@@ -133,7 +134,7 @@
       flex-wrap: wrap;
       gap: 0.8rem 1.4rem;
       margin-top: 0.5rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
@@ -144,7 +145,7 @@
 
     .muted {
       color: var(--text-muted);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .diagram {
@@ -318,11 +319,55 @@
     }
 
     ul {
-      line-height: 1.8;
+      line-height: 1.6;
+      margin-top: 0.25rem;
     }
 
     ul li {
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.2rem;
+    }
+
+    p {
+      margin-top: 0.25rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.25rem;
+      font-size: 0.85rem;
+    }
+
+    table th {
+      text-align: left;
+      padding: 0.4rem 0.6rem;
+      background: var(--accent-lighter);
+      color: var(--accent-dark);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    table td {
+      padding: 0.4rem 0.6rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.4;
+    }
+
+    table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table td:first-child {
+      font-weight: 600;
+      color: var(--accent-dark);
+      white-space: nowrap;
+      width: 1%;
     }
   </style>
 </head>
@@ -336,64 +381,99 @@
           class="header-logo"
         />
       </a>
-      <h1>Project tracking</h1>
+      <h1>Project Tracking</h1>
       <div class="subtitle">
-        Project owner/leader: xxxxxxxx · IDS Area owner: xxxxxxxx
+        <span class="meta-label"> Project owner/leader:</span> xxxxxxxx · <span class="meta-label">IDS Area owner:</span> xxxxxxxx
+      </div>
+      <div class="meta-row" style="margin-top: 0.5rem;">
+        <div><span class="meta-label">Ready:</span> 261231</div>
+        <div>
+          <span class="meta-label">Resources:</span>
+          XX DC staff + 0.1 FTE per unit (NBIS DM?)
+        </div>
       </div>
     </header>
 
     <div class="layout">
       <main class="card">
         <h2>Scope</h2>
-        <p>
-          Centrally store and view project information from all SciLifeLab units in a
-          consistent, searchable way, with clear interfaces for users and staff.
-        </p>
+        <p>Minimal, extensible web-based Project Tracking service for SciLifeLab units with consistent project records, role-based views (users, staff, management), simple lifecycle and milestones, and notifications.</p>
 
         <h2>Out of scope</h2>
-        <p class="muted">To be defined.</p>
+        <p>Full User Portal functionality; replacement of ordering, billing or LIMS systems, and complex workflow automation beyond basic statuses and milestones.</p>
 
         <h2>Value</h2>
-        <p class="muted">To be defined.</p>
+        <ul>
+          <li>Give users a clear overview of their projects (status, next steps, contacts) and reduce email back-and-forth.</li>
+          <li>Give staff and unit leadership a shared view of project portfolios, workloads and bottlenecks for planning and reporting.</li>
+          <li>Provide SciLifeLab with comparable cross-platform project data and evidence to inform future User Portal and IDS developments.</li>
+        </ul>
 
         <h2>Main deliverables</h2>
         <ul>
-          <li>Pan-SciLifeLab project database</li>
-          <li>Web interface for users</li>
-          <li>Web interface for staff</li>
+          <li>Project Tracking service for the SciLifeLab community (staff and researchers), providing clear project overviews, statuses, next steps and contacts.</li>
+          <li>Minimal, robust architecture, data model and integration design that enables the service to interoperate with IAM, Order Portal (or similar) and identifier services.</li>
+          <li>Production-ready web application adopted by an initial 2–4 units and, by project end, a larger set of additional units beyond the pilot group.</li>
         </ul>
 
         <h2>Timelines</h2>
-        <div class="grid-two">
-          <div>
-            <ul>
-              <li><strong>April 2026</strong> – Database implemented</li>
-              <li><strong>May 2026</strong> – Two units with data in the database</li>
-            </ul>
-          </div>
-          <div>
-            <ul>
-              <li><strong>October 2026</strong> – Web interface 1.0, pilot users</li>
-              <li><strong>December 2026</strong> – Launch, all units included</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="meta-row">
-          <div><span class="meta-label">Ready:</span> 261231</div>
-          <div>
-            <span class="meta-label">Resources:</span>
-            XX DC staff + 0.1 FTE per unit (NBIS DM?)
-          </div>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Timeline</th>
+              <th>Activity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Jan 2026</td>
+              <td>Confirm pilot scope and collaboration model with selected units.</td>
+            </tr>
+            <tr>
+              <td>Jan–Feb 2026</td>
+              <td>Conduct user research and mock-up reviews with units and researchers.</td>
+            </tr>
+            <tr>
+              <td>Mar 2026</td>
+              <td>Define MVP architecture, APIs, notification strategy, logging and hosting approach.</td>
+            </tr>
+            <tr>
+              <td>Apr–Jun 2026</td>
+              <td>Build pilot: core web app for users and staff plus initial integrations (IAM, identifiers).</td>
+            </tr>
+            <tr>
+              <td>Jun 2026</td>
+              <td>Pilot-ready release and onboarding of first units.</td>
+            </tr>
+            <tr>
+              <td>Jul 2026</td>
+              <td>Mid-pilot evaluation and quick improvements.</td>
+            </tr>
+            <tr>
+              <td>Aug 2026</td>
+              <td>Extended pilot and preparation for scale-out.</td>
+            </tr>
+            <tr>
+              <td>Sep–Nov 2026</td>
+              <td>Roll-out to additional units.</td>
+            </tr>
+            <tr>
+              <td>Nov 2026</td>
+              <td>Final evaluation and next-phase recommendation.</td>
+            </tr>
+            <tr>
+              <td>Dec 2026</td>
+              <td>Launch of Project Tracking as a SciLifeLab service.</td>
+            </tr>
+          </tbody>
+        </table>
 
         <h2>Dependencies</h2>
         <ul>
-          <li>
-            Identity/Access (IAA) — Leads: xxxxxxxx <br />
-            <span class="muted">Includes replacing current staff database</span>
-          </li>
-          <li>Minor storage — already exists</li>
+          <li>Identity and Access Management / LifeScience ID and role models (including privacy, security and audit).</li>
+          <li>Sample and project identifier services (e.g. BioSamples/EMBL-EBI instance, RAiD).</li>
+          <li>Order Portal and relevant unit systems where interoperability adds value.</li>
+          <li>Overall IDS strategy for cross-platform workflows and future automation.</li>
         </ul>
       </main>
 
