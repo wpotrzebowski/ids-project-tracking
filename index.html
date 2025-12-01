@@ -85,7 +85,7 @@
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
       gap: 1rem;
     }
 
@@ -168,15 +168,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       width: 100%;
-      padding: 0.75rem;
+      padding: 0.5rem 0.75rem;
       margin-top: 0.75rem;
       border-top: 1px solid var(--border);
       cursor: pointer;
       user-select: none;
       color: var(--accent);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       transition: background-color 0.2s ease, color 0.2s ease;
       border-radius: 6px;
@@ -276,19 +276,30 @@
       text-decoration: underline;
     }
 
-    .progress-bar-wrapper {
+    .milestone-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       margin-top: 0.4rem;
-      background: var(--accent-soft);
+      padding: 0.25rem 0.6rem;
       border-radius: 999px;
-      overflow: hidden;
-      height: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
     }
 
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-dark));
-      transition: width 0.3s ease;
+    .milestone-status.completed {
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+    }
+
+    .milestone-status.in-progress {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .milestone-status.not-started {
+      background: var(--accent-lighter);
+      color: var(--text-muted);
     }
 
     .milestone-meta {
@@ -598,12 +609,11 @@
           ${description}
         </p>
 
-        <div class="progress-bar-wrapper" aria-hidden="true">
-          <div class="progress-bar" style="width: ${completion}%;"></div>
+        <div class="milestone-status ${milestone.state === 'closed' ? 'completed' : completion > 0 ? 'in-progress' : 'not-started'}">
+          ${milestone.state === 'closed' ? '✓ Completed' : completion > 0 ? '◐ In Progress' : '○ Not Started'} · ${milestone.state === 'closed' ? 'Closed' : 'Open'} milestone
         </div>
 
         <div class="milestone-meta">
-          <span><strong>${completion}%</strong> complete</span>
           <span><strong>${closedIssues}</strong> closed / <strong>${openIssues}</strong> open issues</span>
           <span><strong>State:</strong> ${milestone.state}</span>
           <span><strong>Due:</strong> ${dueOn}</span>
@@ -670,12 +680,9 @@
           <div class="milestone-overview-value">${totalIssues}</div>
         </div>
         <div class="milestone-overview-progress">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-            <span class="milestone-overview-label">Overall Progress</span>
-            <span style="font-weight: 700; color: var(--accent-dark);">${avgCompletion}%</span>
-          </div>
-          <div class="progress-bar-wrapper">
-            <div class="progress-bar" style="width: ${avgCompletion}%;"></div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span class="milestone-overview-label">Milestones</span>
+            <span style="font-weight: 700; color: var(--accent-dark); font-size: 1rem;">${closedMilestones} closed / ${openMilestones} open</span>
           </div>
         </div>
       `;
