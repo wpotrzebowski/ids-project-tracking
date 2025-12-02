@@ -85,7 +85,7 @@
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 1rem;
     }
 
@@ -157,159 +157,43 @@
       box-sizing: border-box;
     }
 
-    /* Milestones */
+    /* Milestone status badges for timeline table */
 
-    .milestone-section-header {
-      padding: 0.5rem 0;
-      margin-bottom: 0.5rem;
-    }
-
-    .milestone-toggle-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      width: 100%;
-      padding: 0.5rem 0.75rem;
-      margin-top: 0.75rem;
-      border-top: 1px solid var(--border);
-      cursor: pointer;
-      user-select: none;
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 600;
-      transition: background-color 0.2s ease, color 0.2s ease;
-      border-radius: 6px;
-    }
-
-    .milestone-toggle-button:hover {
-      background-color: var(--accent-lighter);
-    }
-
-    .milestone-toggle-icon {
-      font-size: 0.9rem;
-      transition: transform 0.2s ease;
-    }
-
-    .milestone-toggle-button.collapsed .milestone-toggle-icon {
-      transform: rotate(-90deg);
-    }
-
-    .milestone-overview {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 1rem;
-      margin-top: 0.75rem;
-      padding-top: 0.75rem;
-      border-top: 1px solid var(--border);
-      margin-bottom: 0;
-    }
-
-    .milestone-overview-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .milestone-overview-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .milestone-overview-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--accent-dark);
-    }
-
-    .milestone-overview-progress {
-      margin-top: 0.5rem;
-      grid-column: 1 / -1;
-    }
-
-    .milestone-content {
-      max-height: 1000px;
-      overflow: hidden;
-      transition: max-height 0.3s ease, opacity 0.3s ease;
-      opacity: 1;
-    }
-
-    .milestone-content.collapsed {
-      max-height: 0;
-      opacity: 0;
-      margin: 0;
-    }
-
-    .milestone-card {
-      border-top: 1px solid var(--border);
-      padding-top: 0.75rem;
-      margin-top: 0.75rem;
-    }
-
-    .milestone-card:first-of-type {
-      border-top: none;
-      padding-top: 0;
-      margin-top: 0;
-    }
-
-    .milestone-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
-    }
-
-    .milestone-title {
-      font-weight: 600;
-    }
-
-    .milestone-link {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-
-    .milestone-link:hover {
-      text-decoration: underline;
-    }
-
-    .milestone-status {
+    .milestone-status-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      margin-top: 0.4rem;
-      padding: 0.25rem 0.6rem;
+      gap: 0.3rem;
+      padding: 0.2rem 0.5rem;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
+      white-space: nowrap;
     }
 
-    .milestone-status.completed {
+    .milestone-status-badge.completed {
       background: var(--accent-soft);
       color: var(--accent-dark);
     }
 
-    .milestone-status.in-progress {
+    .milestone-status-badge.in-progress {
       background: #fff3cd;
       color: #856404;
     }
 
-    .milestone-status.not-started {
+    .milestone-status-badge.not-started {
       background: var(--accent-lighter);
       color: var(--text-muted);
     }
 
-    .milestone-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      font-size: 0.85rem;
-      margin-top: 0.4rem;
-      color: var(--text-muted);
+    .milestone-status-badge a {
+      color: inherit;
+      text-decoration: none;
     }
+
+    .milestone-status-badge a:hover {
+      text-decoration: underline;
+    }
+
 
     footer.project-footer {
       margin-top: 3rem;
@@ -348,7 +232,7 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 0.25rem;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
     table th {
@@ -364,10 +248,33 @@
     }
 
     table td {
-      padding: 0.4rem 0.6rem;
+      padding: 0.35rem 0.5rem;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
       line-height: 1.4;
+    }
+
+    table td.status-cell {
+      white-space: nowrap;
+      width: 1%;
+    }
+
+    table td.activity-cell a {
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    table td.activity-cell a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    table tr.completed-milestone td {
+      opacity: 0.5;
+    }
+
+    table tr.completed-milestone td.activity-cell a {
+      color: var(--text-muted);
     }
 
     table tr:last-child td {
@@ -427,58 +334,6 @@
           <li>Production-ready web application adopted by an initial 2–4 units and, by project end, a larger set of additional units beyond the pilot group.</li>
         </ul>
 
-        <h2>Timelines</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Timeline</th>
-              <th>Activity</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Jan 2026</td>
-              <td>Confirm pilot scope and collaboration model with selected units.</td>
-            </tr>
-            <tr>
-              <td>Jan–Feb 2026</td>
-              <td>Conduct user research and mock-up reviews with units and researchers.</td>
-            </tr>
-            <tr>
-              <td>Mar 2026</td>
-              <td>Define MVP architecture, APIs, notification strategy, logging and hosting approach.</td>
-            </tr>
-            <tr>
-              <td>Apr–Jun 2026</td>
-              <td>Build pilot: core web app for users and staff plus initial integrations (IAM, identifiers).</td>
-            </tr>
-            <tr>
-              <td>Jun 2026</td>
-              <td>Pilot-ready release and onboarding of first units.</td>
-            </tr>
-            <tr>
-              <td>Jul 2026</td>
-              <td>Mid-pilot evaluation and quick improvements.</td>
-            </tr>
-            <tr>
-              <td>Aug 2026</td>
-              <td>Extended pilot and preparation for scale-out.</td>
-            </tr>
-            <tr>
-              <td>Sep–Nov 2026</td>
-              <td>Roll-out to additional units.</td>
-            </tr>
-            <tr>
-              <td>Nov 2026</td>
-              <td>Final evaluation and next-phase recommendation.</td>
-            </tr>
-            <tr>
-              <td>Dec 2026</td>
-              <td>Launch of Project Tracking as a SciLifeLab service.</td>
-            </tr>
-          </tbody>
-        </table>
-
         <h2>Dependencies</h2>
         <ul>
           <li>Identity and Access Management / LifeScience ID and role models (including privacy, security and audit).</li>
@@ -504,26 +359,68 @@
         </section>
 
         <section class="card">
-          <div class="milestone-section-header">
-            <h2 style="margin: 0;">Milestone status</h2>
-          </div>
-          <div id="milestone-overview" class="milestone-overview" style="display: none;">
-            <!-- Overview stats will be populated by JavaScript -->
-          </div>
-          <div class="milestone-content collapsed" id="milestone-content">
-            <div id="milestones-container">
-              <p class="muted">Loading milestones from GitHub…</p>
-            </div>
-
-            <p class="muted" id="milestone-error" style="display:none; margin-top:0.75rem;">
-              Couldn't load live milestone data from GitHub. You can still open the repository and
-              milestones directly on GitHub.
-            </p>
-          </div>
-          <div class="milestone-toggle-button collapsed" id="milestone-toggle">
-            <span class="milestone-toggle-icon">▼</span>
-            <span>Show details</span>
-          </div>
+          <h2>Timelines</h2>
+          <table id="timelines-table">
+            <thead>
+              <tr>
+                <th>Timeline</th>
+                <th>Activity</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-activity="Confirm pilot scope and collaboration model with selected units.">
+                <td>Jan 2026</td>
+                <td class="activity-cell">Confirm pilot scope and collaboration model with selected units.</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+              <tr data-activity="Conduct user research and mock-up reviews with units and researchers.">
+                <td>Jan–Feb 2026</td>
+                <td class="activity-cell">Conduct user research and mock-up reviews with units and researchers.</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+              <tr data-activity="Define MVP architecture, APIs, notification strategy, logging and hosting approach.">
+                <td>Mar 2026</td>
+                <td class="activity-cell">Define MVP architecture, APIs, notification strategy, logging and hosting approach.</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+              <tr data-activity="Build pilot: core web app for users and staff plus initial integrations (IAM, identifiers).">
+                <td>Apr–Jun 2026</td>
+                <td class="activity-cell">Build pilot: core web app for users and staff plus initial integrations (IAM, identifiers).</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+              <tr data-activity="Pilot-ready release and onboarding of first units.">
+                <td>Jun 2026</td>
+                <td class="activity-cell">Pilot-ready release and onboarding of first units.</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+              <tr data-activity="Mid-pilot evaluation and quick improvements.">
+                <td>Jul 2026</td>
+                <td class="activity-cell">Mid-pilot evaluation and quick improvements.</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+              <tr data-activity="Extended pilot and preparation for scale-out.">
+                <td>Aug 2026</td>
+                <td class="activity-cell">Extended pilot and preparation for scale-out.</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+              <tr data-activity="Roll-out to additional units.">
+                <td>Sep–Nov 2026</td>
+                <td class="activity-cell">Roll-out to additional units.</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+              <tr data-activity="Final evaluation and next-phase recommendation.">
+                <td>Nov 2026</td>
+                <td class="activity-cell">Final evaluation and next-phase recommendation.</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+              <tr data-activity="Launch of Project Tracking as a SciLifeLab service.">
+                <td>Dec 2026</td>
+                <td class="activity-cell">Launch of Project Tracking as a SciLifeLab service.</td>
+                <td class="status-cell"><span class="milestone-status-badge">Loading…</span></td>
+              </tr>
+            </tbody>
+          </table>
         </section>
       </aside>
     </div>
@@ -543,11 +440,9 @@
   </div>
 
   <script>
-    // Basic milestone monitoring using the public GitHub API.
-    // Adjust these values if you change repo.
+    // Milestone monitoring using the public GitHub API.
     const repoOwner = "wpotrzebowski";
     const repoName = "ids-project-tracking";
-
     const milestonesApiUrl =
       "https://api.github.com/repos/" +
       repoOwner +
@@ -563,137 +458,74 @@
       }
     }
 
-    function renderMilestone(milestone) {
+    // Match milestone title to activity description
+    function findMatchingMilestone(milestones, activityText) {
+      // Try exact match first
+      let match = milestones.find(m => m.title === activityText);
+      if (match) return match;
+      
+      // Try partial match (milestone title contains key words from activity)
+      const activityWords = activityText.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+      match = milestones.find(m => {
+        const titleLower = m.title.toLowerCase();
+        return activityWords.some(word => titleLower.includes(word));
+      });
+      
+      return match;
+    }
+
+    function updateTimelineWithMilestones(milestones) {
+      const table = document.getElementById("timelines-table");
+      if (!table) return;
+
+      const rows = table.querySelectorAll("tbody tr");
+      
+      rows.forEach(function(row) {
+        const activityText = row.getAttribute("data-activity");
+        if (!activityText) return;
+
+        const milestone = findMatchingMilestone(milestones, activityText);
+        const statusCell = row.querySelector(".status-cell");
+        const activityCell = row.querySelector("td:nth-child(2)");
+        
+        if (!statusCell || !activityCell) return;
+
+        if (milestone) {
       const openIssues = milestone.open_issues || 0;
       const closedIssues = milestone.closed_issues || 0;
       const total = openIssues + closedIssues;
-      const completion =
-        total > 0 ? Math.round((closedIssues / total) * 100) : 0;
+          const completion = total > 0 ? Math.round((closedIssues / total) * 100) : 0;
+          
+          let statusClass = "not-started";
+          let statusText = "○ Not Started";
+          const isCompleted = milestone.state === "closed";
+          
+          if (isCompleted) {
+            statusClass = "completed";
+            statusText = "✓ Completed";
+            row.classList.add("completed-milestone");
+          } else if (completion > 0) {
+            statusClass = "in-progress";
+            statusText = "◐ In Progress";
+          }
 
-      const dueOn = milestone.due_on
-        ? new Date(milestone.due_on).toLocaleDateString()
-        : "No due date";
-
-      const description =
-        milestone.description ||
-        "Milestone progress for the project tracking implementation.";
-
-      const url =
-        milestone.html_url ||
-        ("https://github.com/" +
-          repoOwner +
-          "/" +
-          repoName +
-          "/milestone/" +
-          milestone.number);
-
-      const div = document.createElement("div");
-      div.className = "milestone-card";
-
-      div.innerHTML = `
-        <div class="milestone-header">
-          <div class="milestone-title">
-            ${milestone.title}
-          </div>
-          <a
-            class="milestone-link"
-            href="${url}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub
-          </a>
-        </div>
-
-        <p class="muted">
-          ${description}
-        </p>
-
-        <div class="milestone-status ${milestone.state === 'closed' ? 'completed' : completion > 0 ? 'in-progress' : 'not-started'}">
-          ${milestone.state === 'closed' ? '✓ Completed' : completion > 0 ? '◐ In Progress' : '○ Not Started'} · ${milestone.state === 'closed' ? 'Closed' : 'Open'} milestone
-        </div>
-
-        <div class="milestone-meta">
-          <span><strong>${closedIssues}</strong> closed / <strong>${openIssues}</strong> open issues</span>
-          <span><strong>State:</strong> ${milestone.state}</span>
-          <span><strong>Due:</strong> ${dueOn}</span>
-        </div>
-      `;
-
-      return div;
-    }
-
-    function updateMilestoneOverview(milestones) {
-      const overview = document.getElementById("milestone-overview");
-      if (!overview || !milestones || milestones.length === 0) {
-        if (overview) overview.style.display = "none";
-        return;
-      }
-
-      let totalOpen = 0;
-      let totalClosed = 0;
-      let openMilestones = 0;
-      let closedMilestones = 0;
-      let totalCompletion = 0;
-      let milestonesWithIssues = 0;
-
-      milestones.forEach(function(m) {
-        const openIssues = m.open_issues || 0;
-        const closedIssues = m.closed_issues || 0;
-        const total = openIssues + closedIssues;
-        
-        totalOpen += openIssues;
-        totalClosed += closedIssues;
-        
-        if (m.state === "open") {
-          openMilestones++;
+          const url = milestone.html_url || 
+            `https://github.com/${repoOwner}/${repoName}/milestone/${milestone.number}`;
+          
+          // Make activity text clickable
+          activityCell.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer">${activityText}</a>`;
+          
+          // Update status badge
+          statusCell.innerHTML = `<a href="${url}" target="_blank" rel="noopener noreferrer"><span class="milestone-status-badge ${statusClass}">${statusText}</span></a>`;
         } else {
-          closedMilestones++;
-        }
-
-        if (total > 0) {
-          totalCompletion += Math.round((closedIssues / total) * 100);
-          milestonesWithIssues++;
+          // No milestone found, keep original text
+          activityCell.textContent = activityText;
+          statusCell.innerHTML = '<span class="milestone-status-badge not-started">○ No milestone</span>';
         }
       });
-
-      const avgCompletion = milestonesWithIssues > 0 
-        ? Math.round(totalCompletion / milestonesWithIssues) 
-        : 0;
-      const totalIssues = totalOpen + totalClosed;
-
-      overview.innerHTML = `
-        <div class="milestone-overview-item">
-          <div class="milestone-overview-label">Total</div>
-          <div class="milestone-overview-value">${milestones.length}</div>
-        </div>
-        <div class="milestone-overview-item">
-          <div class="milestone-overview-label">Open</div>
-          <div class="milestone-overview-value">${openMilestones}</div>
-        </div>
-        <div class="milestone-overview-item">
-          <div class="milestone-overview-label">Closed</div>
-          <div class="milestone-overview-value">${closedMilestones}</div>
-        </div>
-        <div class="milestone-overview-item">
-          <div class="milestone-overview-label">Issues</div>
-          <div class="milestone-overview-value">${totalIssues}</div>
-        </div>
-        <div class="milestone-overview-progress">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span class="milestone-overview-label">Milestones</span>
-            <span style="font-weight: 700; color: var(--accent-dark); font-size: 1rem;">${closedMilestones} closed / ${openMilestones} open</span>
-          </div>
-        </div>
-      `;
-
-      overview.style.display = "grid";
     }
 
     function loadMilestones() {
-      const container = document.getElementById("milestones-container");
-      if (!container) return;
-
       fetch(milestonesApiUrl)
         .then(function (response) {
           if (!response.ok) {
@@ -702,52 +534,21 @@
           return response.json();
         })
         .then(function (data) {
-          container.innerHTML = "";
-
-          if (!Array.isArray(data) || data.length === 0) {
-            container.innerHTML =
-              '<p class="muted">No milestones found for this repository.</p>';
-            updateMilestoneOverview([]);
-            return;
+          if (Array.isArray(data) && data.length > 0) {
+            updateTimelineWithMilestones(data);
           }
-
-          // Optional: sort by due date (earliest first)
-          data.sort(function (a, b) {
-            const da = a.due_on ? new Date(a.due_on).getTime() : Infinity;
-            const db = b.due_on ? new Date(b.due_on).getTime() : Infinity;
-            return da - db;
-          });
-
-          // Update overview with summary stats
-          updateMilestoneOverview(data);
-
-          data.forEach(function (m) {
-            const card = renderMilestone(m);
-            container.appendChild(card);
-          });
         })
-        .catch(function () {
-          document.getElementById("milestone-error").style.display = "block";
-          updateMilestoneOverview([]);
+        .catch(function (error) {
+          console.error("Error loading milestones:", error);
+          // Show error state in timeline
+          const rows = document.querySelectorAll("#timelines-table tbody tr");
+          rows.forEach(function(row) {
+            const statusCell = row.querySelector(".status-cell");
+            if (statusCell) {
+              statusCell.innerHTML = '<span class="milestone-status-badge not-started">Error loading</span>';
+            }
+          });
         });
-    }
-
-    // Milestone section toggle
-    const milestoneToggle = document.getElementById("milestone-toggle");
-    const milestoneContent = document.getElementById("milestone-content");
-    
-    if (milestoneToggle && milestoneContent) {
-      milestoneToggle.addEventListener("click", function() {
-        const isCollapsed = milestoneToggle.classList.contains("collapsed");
-        milestoneToggle.classList.toggle("collapsed");
-        milestoneContent.classList.toggle("collapsed");
-        
-        // Update button text
-        const buttonText = milestoneToggle.querySelector("span:last-child");
-        if (buttonText) {
-          buttonText.textContent = isCollapsed ? "Hide details" : "Show details";
-        }
-      });
     }
 
     updateLastUpdated();
